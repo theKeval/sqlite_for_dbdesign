@@ -29,7 +29,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_CONTACTS + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
                 + KEY_PH_NO + " TEXT" + ")";
-        db.execSQL(CREATE_CONTACTS_TABLE);
+
+        String createMedicineTable =
+                "CREATE TABLE medicine(" +
+                        "medicine_id INTEGER PRIMARY KEY," +
+                        "medicine_name TEXT" +
+                        ")";
+
+
+        db.execSQL(createMedicineTable);
     }
 
     // Upgrading database
@@ -37,10 +45,21 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older table if existed
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_CONTACTS);
+        db.execSQL("DROP TABLE IF EXISTS medicine");
 
         // Create tables again
         onCreate(db);
     }
+
+    void addMedicine(String med_name){
+        String insertQuery = "INSERT INTO medicine (medicine_name) values ('"+med_name+"')";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        // Cursor cursor = db.rawQuery(insertQuery, null);
+
+        db.execSQL(insertQuery);
+    }
+
 
     // code to add the new contact
     void addContact(Contact contact) {
