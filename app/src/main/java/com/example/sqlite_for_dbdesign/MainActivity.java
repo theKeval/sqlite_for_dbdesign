@@ -4,9 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    public DatabaseHandler db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        DatabaseHandler db = new DatabaseHandler(this);
+        db = new DatabaseHandler(this);
 
         // Inserting Contacts
         Log.d("Insert: ", "Inserting ..");
@@ -42,4 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void clicked(View view) {
+        db.updateMedicine("updated medicine", 1);
+    }
 }

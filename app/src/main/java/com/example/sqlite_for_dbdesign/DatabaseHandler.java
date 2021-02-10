@@ -60,6 +60,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL(insertQuery);
     }
 
+    public void updateMedicine(String med_name, int med_id){
+        String updateQuery =
+                "UPDATE medicine SET medicine_name='"+med_name+"' WHERE medicine_id="+med_id;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL(updateQuery);
+    }
+
 
     // code to add the new contact
     void addContact(Contact contact) {
